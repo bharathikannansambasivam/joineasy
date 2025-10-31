@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Logout from "./Logout";
 
 function Dashboard() {
+  const [refresh, setRefresh] = useState(false);
+
   const [showForm, setShowForm] = useState(false);
   const [assignments, setAssignments] = useState([]);
   const role = localStorage.getItem("UserRole");
@@ -40,6 +42,7 @@ function Dashboard() {
     setLink("");
     setDescription("");
     setShowForm(false);
+    setRefresh(!refresh);
   };
   return (
     <div className="flex flex-col items-center  min-h-screen bg-gray-50 p-5">
@@ -99,10 +102,7 @@ function Dashboard() {
         </div>
       )}
 
-      <AllAssignment
-        assignments={assignments}
-        setAssignments={setAssignments}
-      />
+      <AllAssignment refresh={refresh} />
     </div>
   );
 }

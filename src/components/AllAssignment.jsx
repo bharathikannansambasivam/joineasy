@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logout from "./Logout";
 
-function AllAssignment({ assignments, setAssignments }) {
+function AllAssignment({ refresh }) {
+  const [assignments, setAssignments] = useState(
+    JSON.parse(localStorage.getItem("assignments")) || []
+  );
   const role = localStorage.getItem("UserRole");
   const navigate = useNavigate();
-
+  useEffect(() => {
+    const savedAssignments =
+      JSON.parse(localStorage.getItem("assignments")) || [];
+    setAssignments(savedAssignments);
+  }, [refresh]);
   useEffect(() => {
     if (!role) {
       alert("You must log in first!");
@@ -35,6 +42,7 @@ function AllAssignment({ assignments, setAssignments }) {
 
   return (
     <div className="flex flex-col w-full items-center min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-6">
+      {role == "Student" && <Logout />}
       <div className="flex justify-between gap-2 items-center w-full max-w-xl mb-6">
         <h3 className="text-2xl font-bold text-purple-700 tracking-wide">
           Assignments
