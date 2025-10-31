@@ -88,7 +88,6 @@ function AllAssignment({ refresh }) {
               <a
                 href={item.link}
                 target="_blank"
-                rel="noopener noreferrer"
                 className="inline-block text-sm font-medium text-blue-600 hover:text-blue-700 underline"
               >
                 🔗 Open Drive Link
